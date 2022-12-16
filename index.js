@@ -3,6 +3,9 @@ const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
+const passport = require("passport");
+const { loginCheck } = require("./auth/passport");
+loginCheck(passport);
 
 // Mongo DB conncetion
 mongoose.set('strictQuery', true);
@@ -11,11 +14,13 @@ mongoose.connect(database, {useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-
 app.set('view engine', 'ejs');
 
 //BodyParsing
 app.use(express.urlencoded({extended: false}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Routes
 app.use('/', require('./routes/login'));
