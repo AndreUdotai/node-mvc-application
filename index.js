@@ -14,6 +14,9 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.set('view engine', 'ejs');
 
+//BodyParsing
+app.use(express.urlencoded({extended: false}));
+
 //Routes
 app.use('/', require('./routes/login'));
 
