@@ -1,4 +1,4 @@
-const { dashboardView } = require("../controllers/dashboardController");
+
 
 //For Register Page
 const dashboardView = (req, res) => {
